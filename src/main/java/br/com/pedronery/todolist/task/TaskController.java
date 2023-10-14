@@ -34,8 +34,8 @@ public class TaskController {
         if (currentTime.isAfter(taskModel.getStartAt()) || currentTime.isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Data Inicio deve ser maior que a data atual");
         }
-        if (taskModel.getEndAt().isAfter(taskModel.getStartAt())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Data Inicio deve ser menor que a data de");
+        if (taskModel.getEndAt().isBefore(taskModel.getStartAt())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Data Inicio deve ser menor que a data de inicio.");
         }
 
         var task = taskRepository.save(taskModel);
